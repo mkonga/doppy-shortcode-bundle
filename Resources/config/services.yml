@@ -1,0 +1,24 @@
+services:
+    doppy_shortcode.processor:
+        class: Doppy\ShortcodeBundle\ProcessorContainer\ProcessorContainer
+        lazy:  true
+        arguments:
+            - "@service_container"
+
+    doppy_shortcode.tag_handler:
+        class: Doppy\Shortcode\TagHandlerContainer\TagHandlerContainer
+
+    doppy_shortcode.parser:
+        class: Doppy\Shortcode\Parser\Parser
+        arguments:
+            - "@doppy_shortcode.syntax"
+
+    doppy_shortcode.syntax:
+        class: Doppy\Shortcode\Syntax\Syntax
+
+    doppy_shortcode.shortcode_extension:
+        class: Doppy\ShortcodeBundle\Twig\ShortcodeExtension
+        arguments:
+            - "@doppy_shortcode.processor"
+        tags:
+            - { name: twig.extension }

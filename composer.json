@@ -1,0 +1,27 @@
+{
+    "name"       : "doppy/shortcode-bundle",
+    "description": "Shortcode/BBCode parser",
+    "keywords"   : [
+        "bbcode",
+        "shortcode",
+        "parser"
+    ],
+    "license"    : "MIT",
+    "authors"    : [
+        {
+            "name" : "Daan van den Berg",
+            "email": "zawadi@doppy.nl"
+        }
+    ],
+    "require"    : {
+        "php"              : ">=5.5",
+        "doppy/shortcode"  : "^0.1.0",
+        "doppy/twig-bundle": "^1.0.3",
+        "doppy/util-bundle": "^1.0.2"
+    },
+    "autoload"   : {
+        "psr-4": {
+            "Doppy\\ShortcodeBundle\\": ""
+        }
+    }
+}

@@ -1,0 +1,56 @@
+services:
+    doppy_shortcode.tag_handler.bold:
+        class: Doppy\Shortcode\TagHandler\SimpleTagHandler
+        arguments:
+            - "b"
+            - "b"
+        tags:
+            - { name: "doppy_shortcode.tag_handler" }
+
+    doppy_shortcode.tag_handler.italic:
+        class: Doppy\Shortcode\TagHandler\SimpleTagHandler
+        arguments:
+            - "i"
+            - "i"
+        tags:
+            - { name: "doppy_shortcode.tag_handler" }
+
+    doppy_shortcode.tag_handler.underline:
+        class: Doppy\Shortcode\TagHandler\SimpleTagHandler
+        arguments:
+            - "u"
+            - "u"
+        tags:
+            - { name: "doppy_shortcode.tag_handler" }
+
+    doppy_shortcode.tag_handler.strikethrough:
+        class: Doppy\Shortcode\TagHandler\SimpleTagHandler
+        arguments:
+            - "s"
+            - "s"
+        tags:
+            - { name: "doppy_shortcode.tag_handler" }
+
+    doppy_shortcode.tag_handler.code:
+        class: Doppy\Shortcode\TagHandler\SimpleTagHandler
+        arguments:
+            - "code"
+            - "pre"
+        tags:
+            - { name: "doppy_shortcode.tag_handler" }
+
+    doppy_shortcode.tag_handler.fallback_shortcode:
+        class: Doppy\ShortcodeBundle\TagHandler\Fallback\ShortcodeTagHandler
+        arguments:
+            - "fallback.shortcode"
+            - "@twig"
+        tags:
+            - { name: "doppy_shortcode.tag_handler" }
+
+    doppy_shortcode.tag_handler.fallback.html:
+        class: Doppy\ShortcodeBundle\TagHandler\Fallback\HtmlTagHandler
+        arguments:
+            - "fallback.html"
+            - "@twig"
+        tags:
+            - { name: "doppy_shortcode.tag_handler" }
