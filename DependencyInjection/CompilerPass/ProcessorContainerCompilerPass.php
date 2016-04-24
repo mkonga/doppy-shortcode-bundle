@@ -19,7 +19,8 @@ class ProcessorContainerCompilerPass extends BaseTagServiceCompilerPass
         $serviceDefinition->addMethodCall(
             'add',
             array(
-                $attributes['service_id']
+                $attributes['service_id'],
+                $attributes['alias']
             )
         );
     }
