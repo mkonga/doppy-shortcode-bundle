@@ -2,35 +2,21 @@
 
 namespace Doppy\ShortcodeBundle\DependencyInjection\CompilerPass;
 
-use Doppy\UtilBundle\Helper\CompilerPass\BaseTagServiceCompilerPass;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
 
-class TagHandlerCompilerPass extends BaseTagServiceCompilerPass
+class TagHandlerCompilerPass implements CompilerPassInterface
 {
-    protected function handleTag(
-        ContainerBuilder $containerBuilder,
-        Definition $serviceDefinition,
-        Reference $taggedServiceReference,
-        $attributes
-    )
-    {
-        $serviceDefinition->addMethodCall(
-            'addHandler',
-            array(
-                $taggedServiceReference
-            )
-        );
-    }
+    use PriorityTaggedServiceTrait;
 
-    protected function getService(ContainerBuilder $containerBuilder)
+    public function process(ContainerBuilder $containerBuilder)
     {
-        return $containerBuilder->getDefinition('doppy_shortcode.tag_handler');
-    }
+        $tagHandlerDefinition = $containerBuilder->findDefinition('doppy_shortcode.tag_handler');
+        $taggedHandlers       = $this->findAndSortTaggedServices('doppy_shortcode.tag_handler', $containerBuilder);
 
-    protected function getTaggedServices(ContainerBuilder $containerBuilder)
-    {
-        return $containerBuilder->findTaggedServiceIds('doppy_shortcode.tag_handler');
+        foreach ($taggedHandlers as $taggedHandlerReference) {
+            $tagHandlerDefinition->addMethodCall('addHandler', array($taggedHandlerReference));
+        }
     }
 }

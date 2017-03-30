@@ -1,4 +1,0 @@
-doppy_shortcode:
-    processors:
-        default:
-            handlers: [ "b", "i" ]
